@@ -8,9 +8,9 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests_Namespace
-{
+    {
     [TestFixture]
-    public class GroupCreationTests_Class
+    public class ContactCreationTests_Class
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -18,7 +18,7 @@ namespace WebAddressbookTests_Namespace
         private bool acceptNextAlert = true;
 
         [SetUp]
-        public void SetupTest_Method()
+        public void SetupTest_AutoMethod()
         {
             FirefoxOptions options = new FirefoxOptions();
             options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
@@ -29,7 +29,7 @@ namespace WebAddressbookTests_Namespace
         }
 
         [TearDown]
-        public void TeardownTest_Method()
+        public void TeardownTest_AutoMethod()
         {
             try
             {
@@ -43,18 +43,18 @@ namespace WebAddressbookTests_Namespace
         }
 
         [Test]
-        public void GroupCreationTest_Method()
+        public void ContactCreationTests_Method()
         {
-            OpenHomePage_AdditMethod();
+            GoToHomepage_AdditMethod();
             Login_AdditMethod(new AccountData_Class("admin","secret"));
-            GoToGroupsPage_AdditMethod();
-            InitNewGroupCreation_AdditMethod();
-            GroupData_Class group = new GroupData_Class("Name_Value");
-            group.GroupHeader_Property = "Header_Value";
-            group.GroupFooter_Property = "Footer_Value";
-            FillGroupForm_AdditMethod(group);
-            SubmitGroupCreation_AdditMethod();
-            ReturnToGroupsPage_AdditMethod();
+            InitContactCreation_AdditMethod();
+
+            ContactData_Class contact = new ContactData_Class("LastName_Value", "FirstName_Value");
+            contact.ContactMiddleName_Property = "MiddleName_Value";
+
+            FillContactForm_AdditMethod(contact);
+            SubmitContactCreation_AdditMethod();
+            GoToHomePage_AdditMethod();
             Logout_AdditMethod();
         }
 
@@ -63,34 +63,27 @@ namespace WebAddressbookTests_Namespace
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void ReturnToGroupsPage_AdditMethod()
+        private void GoToHomePage_AdditMethod()
         {
-            driver.FindElement(By.LinkText("group page")).Click();
+            driver.FindElement(By.LinkText("home page")).Click();
         }
 
-        private void SubmitGroupCreation_AdditMethod()
+        private void SubmitContactCreation_AdditMethod()
         {
             driver.FindElement(By.Name("submit")).Click();
         }
 
-        private void FillGroupForm_AdditMethod(GroupData_Class group)
+        private void FillContactForm_AdditMethod(ContactData_Class contact)
         {
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.GroupName_Property);
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.GroupHeader_Property);
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.GroupFooter_Property);
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.ContactFirstName_Property);
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(contact.ContactLastName_Property);
         }
 
-        private void InitNewGroupCreation_AdditMethod()
+        private void InitContactCreation_AdditMethod()
         {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        private void GoToGroupsPage_AdditMethod()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
+            driver.FindElement(By.LinkText("add new")).Click();
         }
 
         private void Login_AdditMethod(AccountData_Class account)
@@ -102,13 +95,12 @@ namespace WebAddressbookTests_Namespace
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
-        private void OpenHomePage_AdditMethod()
+        private void GoToHomepage_AdditMethod()
         {
-            // Open homepage. No needs in comment due to Name of Method is enough 
-            driver.Navigate().GoToUrl(baseURL + "addressbook/group.php");
+            driver.Navigate().GoToUrl(baseURL + "addressbook/");
         }
 
-        private bool IsElementPresent_AutoMethod(By by)
+        private bool IsElementPresent(By by)
         {
             try
             {
@@ -121,7 +113,7 @@ namespace WebAddressbookTests_Namespace
             }
         }
 
-        private bool IsAlertPresent_AutoMethod()
+        private bool IsAlertPresent()
         {
             try
             {
@@ -134,7 +126,7 @@ namespace WebAddressbookTests_Namespace
             }
         }
 
-        private string CloseAlertAndGetItsText_AutoMethod()
+        private string CloseAlertAndGetItsText()
         {
             try
             {
