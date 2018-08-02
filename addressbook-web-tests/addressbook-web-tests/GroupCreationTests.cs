@@ -7,10 +7,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace WebAddressbookTests
+namespace WebAddressbookTests_Namespace
 {
     [TestFixture]
-    public class GroupCreationTests
+    public class GroupCreationTests_Class
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
@@ -18,7 +18,7 @@ namespace WebAddressbookTests
         private bool acceptNextAlert = true;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupTest_AdditMethod()
         {
             FirefoxOptions options = new FirefoxOptions();
             options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
@@ -29,7 +29,7 @@ namespace WebAddressbookTests
         }
 
         [TearDown]
-        public void TeardownTest()
+        public void TeardownTest_AdditMethod()
         {
             try
             {
@@ -43,69 +43,72 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void GroupCreationTest()
+        public void GroupCreationTest_Method()
         {
-            OpenHomePage();
-            Login("admin","secret");
-            GoToGroupsPage();
-            InitNewGroupCreation();
-            FillGroupForm("name","header","footer");
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
-            Logout();
+            OpenHomePage_AdditMethod();
+            Login_AdditMethod(new AccountData_Class("admin","secret"));
+            GoToGroupsPage_AdditMethod();
+            InitNewGroupCreation_AdditMethod();
+            GroupData_Class group = new GroupData_Class("Name_Value");
+            group.GroupHeader_Property = "Header_Value";
+            group.GroupFooter_Property = "Footer_Value";
+            FillGroupForm_AdditMethod(group);
+            SubmitGroupCreation_AdditMethod();
+            ReturnToGroupsPage_AdditMethod();
+            Logout_AdditMethod();
         }
 
-        private void Logout()
+        private void Logout_AdditMethod()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void ReturnToGroupsPage()
+        private void ReturnToGroupsPage_AdditMethod()
         {
             driver.FindElement(By.LinkText("group page")).Click();
         }
 
-        private void SubmitGroupCreation()
+        private void SubmitGroupCreation_AdditMethod()
         {
             driver.FindElement(By.Name("submit")).Click();
         }
 
-        private void FillGroupForm(string group_name, string group_header, string group_footer)
+        private void FillGroupForm_AdditMethod(GroupData_Class group)
         {
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group_name);
+            driver.FindElement(By.Name("group_name")).SendKeys(group.GroupName_Property);
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group_header);
+            driver.FindElement(By.Name("group_header")).SendKeys(group.GroupHeader_Property);
             driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group_footer);
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.GroupFooter_Property);
         }
 
-        private void InitNewGroupCreation()
+        private void InitNewGroupCreation_AdditMethod()
         {
             driver.FindElement(By.Name("new")).Click();
         }
 
-        private void GoToGroupsPage()
+        private void GoToGroupsPage_AdditMethod()
         {
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
-        private void Login(string username, string password)
+        private void Login_AdditMethod(AccountData_Class account)
         {
             driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(username);
+            driver.FindElement(By.Name("user")).SendKeys(account.Username_Property);
             driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(password);
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password_property);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
-        private void OpenHomePage()
+        private void OpenHomePage_AdditMethod()
         {
             // Open homepage. No needs in comment due to Name of Method is enough 
             driver.Navigate().GoToUrl(baseURL + "addressbook/group.php");
         }
 
-        private bool IsElementPresent(By by)
+        private bool IsElementPresent_AutoMethod(By by)
         {
             try
             {
@@ -118,7 +121,7 @@ namespace WebAddressbookTests
             }
         }
 
-        private bool IsAlertPresent()
+        private bool IsAlertPresent_AutoMethod()
         {
             try
             {
@@ -131,7 +134,7 @@ namespace WebAddressbookTests
             }
         }
 
-        private string CloseAlertAndGetItsText()
+        private string CloseAlertAndGetItsText_AutoMethod()
         {
             try
             {
