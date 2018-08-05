@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace WebAddressbookTests_Namespace
 {
     [TestClass]
-    public class UnitTest1
+    public class FigureTest
     {
         [TestMethod]
         public void TestMethodSquare()

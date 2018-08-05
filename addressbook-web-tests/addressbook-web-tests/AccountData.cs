@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests_Namespace
 {
-    class AccountData_Class
+    public class AccountData_Class
     {
         private string username_Field;
         private string password_Field;

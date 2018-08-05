@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests_Namespace
 {
-    class ContactData_Class
+    public class ContactData_Class
     {
         private string contactFirstName_Field;
         private string contactMiddleName_Field="";

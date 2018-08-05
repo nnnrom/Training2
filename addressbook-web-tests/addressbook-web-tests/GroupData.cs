@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests_Namespace
 {
-    class GroupData_Class
+    public class GroupData_Class
     {
         private string groupName_Field;
         private string groupHeader_Field="";
