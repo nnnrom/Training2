@@ -4,28 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAddressbookTests_Namespace
+namespace WebAddressbookTests
 {
-    class Square : Figure
+    class Circle:Figure
     {
-        private int size;
+        private int radius;
 
-        public Square(int size)
+        public Circle (int radius)
         {
-            this.size = size;
+            this.radius = radius;
+
         }
 
-        public int Size
+        public int Radius
         {
             get
             {
-                return size;
+                return radius;
             }
             set
             {
-                size = value; // instead of size
+                radius = value;
             }
         }
-
     }
 }
