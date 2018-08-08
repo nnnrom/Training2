@@ -13,8 +13,8 @@ namespace WebAddressbookTests
         public void ContactCreationTest()
         {
 
-            ContactData contact = new ContactData("LastName_Value", "FirstName_Value");
-            contact.ContactMiddleName_Property = "MiddleName_Value";
+            ContactData contact = new ContactData("LastName_Value1", "FirstName_Value1");
+            //contact.ContactMiddleName_Property = "MiddleName_Value";
 
             app.Contact_Property.Create(contact);
         }
