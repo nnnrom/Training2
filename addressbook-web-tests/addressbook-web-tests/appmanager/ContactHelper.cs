@@ -32,7 +32,7 @@ namespace WebAddressbookTests
             return this;            
         }
 
-        public ContactHelper Remove(string index)
+        public ContactHelper Remove(int index)
         {
             manager.Navigator_Property.GoToContactsPage();
             SelectExistingContact(index);
@@ -78,9 +78,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SelectExistingContact(string index)
+        public ContactHelper SelectExistingContact(int index)
         {
-            driver.FindElement(By.Id(index)).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
 
