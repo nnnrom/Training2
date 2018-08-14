@@ -22,6 +22,15 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper CreateIfExists(ContactData contact)
+        {
+            InitContactCreation();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReturnToHomePage();
+            return this;
+        }
+
         public ContactHelper Modify (int index, ContactData newData)
         {
             manager.Navigator_Property.GoToContactsPage();
@@ -30,6 +39,16 @@ namespace WebAddressbookTests
             SubmitContactModification();
             ReturnToHomePage();
             return this;            
+        }
+
+        public ContactHelper ModifyIfExists(int index, ContactData newData)
+        {
+            manager.Navigator_Property.GoToContactsPage();
+            SelectModifyContact(index);
+            FillContactForm(newData);
+            SubmitContactModification();
+            ReturnToHomePage();
+            return this;
         }
 
         public ContactHelper Remove(int index)
@@ -51,12 +70,9 @@ namespace WebAddressbookTests
 
         public ContactHelper FillContactForm(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.ContactFirstName_Property);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.ContactLastName_Property);
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.ContactMiddleName_Property);
+            Type(By.Name("firstname"), contact.FirstName_Property);
+            Type(By.Name("lastname"), contact.LastName_Property);
+            Type(By.Name("middlename"), contact.MiddleName_Property);
             return this;
         }
 

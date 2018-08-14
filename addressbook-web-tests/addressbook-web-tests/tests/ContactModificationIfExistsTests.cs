@@ -8,15 +8,15 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    class ContactModificationTests : TestBase
+    class ContactModificationIfExistsTests : TestBase
     {
         [Test]
-        public void ContactModificationTest()
+        public void ContactModificationIfExistsTest()
         {
             ContactData newData = new ContactData("LastName_newValue", "FirstName_newValue");
             newData.MiddleName_Property = null;
 
-            app.Contact_Property.Modify(1, newData);
+            app.Contact_Property.ModifyIfExists(1, newData);
         }
     }
 }

@@ -58,6 +58,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="tests\ContactCreationIfExistsTests.cs" />
+    <Compile Include="tests\ContactModificationIfExistsTests.cs" />
+    <Compile Include="tests\TestSuiteFixture.cs" />
     <Compile Include="datamodel\AccountData.cs" />
     <Compile Include="datamodel\ContactData.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />

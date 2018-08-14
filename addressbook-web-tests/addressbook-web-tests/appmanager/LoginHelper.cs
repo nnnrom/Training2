@@ -15,10 +15,8 @@ namespace WebAddressbookTests
 
         public LoginHelper Login(AccountData account)
         {
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username_Property);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password_property);
+            Type(By.Name("user"), account.Username_Property);
+            Type(By.Name("pass"), account.Password_property);
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
             return this;
         }

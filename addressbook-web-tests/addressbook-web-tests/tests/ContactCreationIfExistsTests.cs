@@ -7,16 +7,16 @@ using NUnit.Framework;
 namespace WebAddressbookTests
     {
     [TestFixture]
-    public class ContactCreationTests : TestBase
+    public class ContactCreationIfExistsTests : TestBase
     {
         [Test]
-        public void ContactCreationTest()
+        public void ContactCreationIfExistsTest()
         {
 
             ContactData contact = new ContactData("newLastName", "newFirstName");
             //contact.ContactMiddleName_Property = "MiddleName_Value";
 
-            app.Contact_Property.Create(contact);
+            app.Contact_Property.CreateIfExists(contact);
         }
     }
 }

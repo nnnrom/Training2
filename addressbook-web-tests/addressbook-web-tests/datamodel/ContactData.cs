@@ -18,19 +18,19 @@ namespace WebAddressbookTests
             this.FirstName = FirstName;
         }
 
-        public string ContactLastName_Property
+        public string LastName_Property
         {
             get { return LastName; }
             set { LastName = value; }
         }
 
-        public string ContactMiddleName_Property
+        public string MiddleName_Property
         {
             get { return MiddleName; }
             set { MiddleName = value; }
         }
 
-        public string ContactFirstName_Property
+        public string FirstName_Property
         {
             get { return FirstName; }
             set { FirstName = value; }
