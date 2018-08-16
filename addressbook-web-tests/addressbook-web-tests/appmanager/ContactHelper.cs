@@ -33,7 +33,7 @@ namespace WebAddressbookTests
 
         public ContactHelper Modify (int index, ContactData newData)
         {
-            manager.Navigator_Property.GoToContactsPage();
+            manager.Navigator_Property.GoToContactPage();
             SelectModifyContact(index);
             FillContactForm(newData);
             SubmitContactModification();
@@ -43,7 +43,7 @@ namespace WebAddressbookTests
 
         public ContactHelper ModifyIfExists(int index, ContactData newData)
         {
-            manager.Navigator_Property.GoToContactsPage();
+            manager.Navigator_Property.GoToContactPage();
             SelectModifyContact(index);
             FillContactForm(newData);
             SubmitContactModification();
@@ -53,11 +53,11 @@ namespace WebAddressbookTests
 
         public ContactHelper Remove(int index)
         {
-            manager.Navigator_Property.GoToContactsPage();
+            manager.Navigator_Property.GoToContactPage();
             SelectExistingContact(index);
             InitContactRemoval();
             ConfirmContactRemoval();
-            manager.Navigator_Property.GoToContactsPage();
+            manager.Navigator_Property.GoToHomePage();
             return this;
         }
 

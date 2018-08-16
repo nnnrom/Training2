@@ -60,7 +60,7 @@
   <ItemGroup>
     <Compile Include="tests\ContactCreationIfExistsTests.cs" />
     <Compile Include="tests\ContactModificationIfExistsTests.cs" />
-    <Compile Include="tests\TestSuiteFixture.cs" />
+    <Compile Include="tests\AuthTestBase.cs" />
     <Compile Include="datamodel\AccountData.cs" />
     <Compile Include="datamodel\ContactData.cs" />
     <Compile Include="appmanager\ApplicationManager.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\GroupCreationTests.cs" />
     <Compile Include="tests\ContactCreationTests.cs" />
+    <Compile Include="tests\LoginTests.cs" />
     <Compile Include="tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>

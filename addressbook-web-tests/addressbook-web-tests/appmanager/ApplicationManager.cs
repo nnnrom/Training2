@@ -52,7 +52,11 @@ namespace WebAddressbookTests
         {
             if (! app.IsValueCreated)
             {
-                app.Value = new ApplicationManager();
+                //app.Value = new ApplicationManager();
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.navigator.GoToHomePage();
+                app.Value = newInstance;
+                //app.Navigator_Property.GoToHomePage();
             }
             return app.Value;
         }
