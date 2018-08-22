@@ -15,7 +15,7 @@ namespace WebAddressbookTests
 
         public void Login(AccountData account)
         {
-            Task.Delay(300).Wait();
+            //Task.Delay(300).Wait();
             if (IsLoggedIn())
             {
                 if (IsLoggedIn (account))

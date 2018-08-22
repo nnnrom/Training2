@@ -10,9 +10,22 @@ namespace WebAddressbookTests
     public class GroupRemovalTests : AuthTestBase
     {
         [Test]
-        public void GroupRemovalTest()
+        public void PresentGroupRemovalTest()
         {
-            app.Groups_Property.Remove(1);
+            GroupData defaultData = new GroupData("DefaultName");
+            defaultData.GroupHeader_Property = "DefaultHeader";
+            defaultData.GroupFooter_Property = "DefaultFooter";
+
+            app.Groups_Property.RemovePresent(1, defaultData);
         }
+
+        //Delete
+        //[Test]
+        //public void GroupRemovalTest()
+        //{
+        //    app.Groups_Property.Remove(1);
+        //}
+
+        
     }
 }

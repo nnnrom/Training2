@@ -58,8 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="tests\ContactCreationIfExistsTests.cs" />
-    <Compile Include="tests\ContactModificationIfExistsTests.cs" />
     <Compile Include="tests\AuthTestBase.cs" />
     <Compile Include="datamodel\AccountData.cs" />
     <Compile Include="datamodel\ContactData.cs" />

@@ -24,9 +24,14 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Modify (int index, GroupData newData)
+        public GroupHelper ModifyPresent(int index, GroupData newData, GroupData defaultData)
         {
             manager.Navigator_Property.GoToGroupsPage();
+            if (IsAnyGroupPresent()==false)
+            {
+                Create(defaultData);
+                manager.Navigator_Property.GoToGroupsPage();
+            }
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newData);
@@ -35,17 +40,44 @@ namespace WebAddressbookTests
             return this;
         }
 
- 
+        //delete
+        //public GroupHelper Modify (int index, GroupData newData)
+        //{
+        //    manager.Navigator_Property.GoToGroupsPage();
+        //    SelectGroup(index);
+        //    InitGroupModification();
+        //    FillGroupForm(newData);
+        //    SubmitGroupModification();
+        //    ReturnToGroupsPage();
+        //    return this;
+        //}
 
-        public GroupHelper Remove(int index)
+        public GroupHelper RemovePresent(int index, GroupData defaultData)
         {
             manager.Navigator_Property.GoToGroupsPage();
-
+            
+            if (IsAnyGroupPresent() == false)
+            {
+                Create(defaultData);
+                manager.Navigator_Property.GoToGroupsPage();
+            }
             SelectGroup(index);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
+
+        //delete
+        //public GroupHelper Remove(int index)
+        //{
+        //    manager.Navigator_Property.GoToGroupsPage();
+        //
+        //    SelectGroup(index);
+        //    RemoveGroup();
+        //    ReturnToGroupsPage();
+        //    return this;
+        //}
+
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -64,6 +96,11 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("submit")).Click();
             return this;
+        }
+
+        public bool IsAnyGroupPresent()
+        {
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])"));
         }
 
         public GroupHelper SelectGroup(int index)
