@@ -13,13 +13,18 @@ namespace WebAddressbookTests
         [Test]
         public void PresentContactModificationTest()
         {
+            if (app.Contact_Property.IsAnyContactPresent() == false)
+            {
+                ContactData defaultData = new ContactData("default_LastName", "default_LastName");
+                defaultData.MiddleName_Property = null;
+
+                app.Contact_Property.Create(defaultData);
+            }
+
             ContactData newData = new ContactData("new_LastName", "new_FirstName");
             newData.MiddleName_Property = "new_MiddleName";
-
-            ContactData defaultData = new ContactData("default_LastName", "default_LastName");
-            defaultData.MiddleName_Property = null;
-
-            app.Contact_Property.ModifyIfPresent(1, newData, defaultData);
+                        
+            app.Contact_Property.Modify(1, newData);
         }
 
         //delete

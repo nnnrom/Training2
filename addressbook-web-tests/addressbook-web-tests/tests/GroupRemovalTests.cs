@@ -12,11 +12,16 @@ namespace WebAddressbookTests
         [Test]
         public void PresentGroupRemovalTest()
         {
-            GroupData defaultData = new GroupData("DefaultName");
-            defaultData.GroupHeader_Property = "DefaultHeader";
-            defaultData.GroupFooter_Property = "DefaultFooter";
+            if (app.Groups_Property.IsAnyGroupPresent() == false)
+            {
+                GroupData defaultData = new GroupData("DefaultName");
+                defaultData.GroupHeader_Property = "DefaultHeader";
+                defaultData.GroupFooter_Property = "DefaultFooter";
 
-            app.Groups_Property.RemovePresent(1, defaultData);
+                app.Groups_Property.Create(defaultData);
+            }
+
+            app.Groups_Property.Remove(1);
         }
 
         //Delete

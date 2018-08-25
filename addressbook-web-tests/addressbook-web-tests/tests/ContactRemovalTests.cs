@@ -13,10 +13,15 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            ContactData defaultData = new ContactData("default_LastName", "default_LastName");
-            defaultData.MiddleName_Property = null;
+            if (app.Contact_Property.IsAnyContactPresent() == false)
+            {
+                ContactData defaultData = new ContactData("default_LastName", "default_LastName");
+                defaultData.MiddleName_Property = null;
 
-            app.Contact_Property.RemovePresent(1,defaultData);
+                app.Contact_Property.Create(defaultData);
+            }
+
+            app.Contact_Property.Remove(1);
         }
 
         //delete

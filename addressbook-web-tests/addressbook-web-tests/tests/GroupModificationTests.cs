@@ -13,16 +13,35 @@ namespace WebAddressbookTests
         [Test]
         public void PresentGroupModificationTest()
         {
+            if (app.Groups_Property.IsAnyGroupPresent() == false)
+            {
+                GroupData defaultData = new GroupData("DefaultName");
+                defaultData.GroupHeader_Property = "DefaultHeader";
+                defaultData.GroupFooter_Property = "DefaultFooter";
+                                
+                app.Groups_Property.Create(defaultData);
+            }
+
             GroupData newData = new GroupData("NewName");
             newData.GroupHeader_Property = null;
             newData.GroupFooter_Property = "NewFooter";
 
-            GroupData defaultData = new GroupData("DefaultName");
-            defaultData.GroupHeader_Property = "DefaultHeader";
-            defaultData.GroupFooter_Property = "DefaultFooter";
-
-            app.Groups_Property.ModifyPresent(1, newData, defaultData);
+            app.Groups_Property.Modify(1, newData);
         }
+
+        //[Test]
+        //public void PresentGroupModificationTest()
+        //{
+        //    GroupData newData = new GroupData("NewName");
+        //    newData.GroupHeader_Property = null;
+        //    newData.GroupFooter_Property = "NewFooter";
+        //
+        //    GroupData defaultData = new GroupData("DefaultName");
+        //    defaultData.GroupHeader_Property = "DefaultHeader";
+        //    defaultData.GroupFooter_Property = "DefaultFooter";
+        //
+        //    app.Groups_Property.ModifyPresent(1, newData, defaultData);
+        //}
 
         //delete
         //[Test]

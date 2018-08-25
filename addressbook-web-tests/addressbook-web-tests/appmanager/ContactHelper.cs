@@ -22,55 +22,59 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper CreateIfExists(ContactData contact)
-        {
-            InitContactCreation();
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
-            return this;
-        }
 
-        public ContactHelper ModifyIfPresent (int index, ContactData newData, ContactData defaultData)
-        {
-            manager.Navigator_Property.GoToContactPage();
-            if (IsAnyContactPresent() == false)
-            {
-                Create(defaultData);
-                manager.Navigator_Property.GoToContactPage();
-            }
-            SelectModifyContact(index);
-            FillContactForm(newData);
-            SubmitContactModification();
-            ReturnToHomePage();
-            return this;
-        }
-
-        private bool IsAnyContactPresent()
-        {
-            return IsElementPresent(By.XPath("(//img[@alt='Edit'])"));
-        }
-
-        //delete
-        //public ContactHelper Modify (int index, ContactData newData)
+        //public ContactHelper ModifyIfPresent (int index, ContactData newData, ContactData defaultData)
         //{
         //    manager.Navigator_Property.GoToContactPage();
+        //    if (IsAnyContactPresent() == false)
+        //    {
+        //        Create(defaultData);
+        //        manager.Navigator_Property.GoToContactPage();
+        //    }
         //    SelectModifyContact(index);
         //    FillContactForm(newData);
         //    SubmitContactModification();
         //    ReturnToHomePage();
-        //    return this;            
+        //    return this;
         //}
 
-
-        public ContactHelper RemovePresent(int index, ContactData defaultData)
+        public bool IsAnyContactPresent()
         {
             manager.Navigator_Property.GoToContactPage();
-            if (IsAnyContactPresent() == false)
-            {
-                Create(defaultData);
-                manager.Navigator_Property.GoToContactPage();
-            }
+            return IsElementPresent(By.XPath("(//img[@alt='Edit'])"));
+        }
+
+        
+         public ContactHelper Modify (int index, ContactData newData)
+         {
+             manager.Navigator_Property.GoToContactPage();
+             SelectModifyContact(index);
+             FillContactForm(newData);
+             SubmitContactModification();
+             ReturnToHomePage();
+             return this;            
+         }
+
+
+        //public ContactHelper RemovePresent(int index, ContactData defaultData)
+        //{
+        //    manager.Navigator_Property.GoToContactPage();
+        //    if (IsAnyContactPresent() == false)
+        //    {
+        //        Create(defaultData);
+        //        manager.Navigator_Property.GoToContactPage();
+        //    }
+        //    SelectExistingContact(index);
+        //    InitContactRemoval();
+        //    ConfirmContactRemoval();
+        //    manager.Navigator_Property.GoToHomePage();
+        //    return this;
+        //}
+
+        
+        public ContactHelper Remove(int index)
+        {
+            manager.Navigator_Property.GoToContactPage();
             SelectExistingContact(index);
             InitContactRemoval();
             ConfirmContactRemoval();
@@ -78,16 +82,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-        //delete
-        //public ContactHelper Remove(int index)
-        //{
-        //    manager.Navigator_Property.GoToContactPage();
-        //    SelectExistingContact(index);
-        //    InitContactRemoval();
-        //    ConfirmContactRemoval();
-        //    manager.Navigator_Property.GoToHomePage();
-        //    return this;
-        //}
         public ContactHelper InitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();

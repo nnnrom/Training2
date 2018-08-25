@@ -23,15 +23,10 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
-
-        public GroupHelper ModifyPresent(int index, GroupData newData, GroupData defaultData)
+                        
+        public GroupHelper Modify (int index, GroupData newData)
         {
             manager.Navigator_Property.GoToGroupsPage();
-            if (IsAnyGroupPresent()==false)
-            {
-                Create(defaultData);
-                manager.Navigator_Property.GoToGroupsPage();
-            }
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newData);
@@ -39,44 +34,16 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
-
-        //delete
-        //public GroupHelper Modify (int index, GroupData newData)
-        //{
-        //    manager.Navigator_Property.GoToGroupsPage();
-        //    SelectGroup(index);
-        //    InitGroupModification();
-        //    FillGroupForm(newData);
-        //    SubmitGroupModification();
-        //    ReturnToGroupsPage();
-        //    return this;
-        //}
-
-        public GroupHelper RemovePresent(int index, GroupData defaultData)
+                
+        public GroupHelper Remove(int index)
         {
             manager.Navigator_Property.GoToGroupsPage();
-            
-            if (IsAnyGroupPresent() == false)
-            {
-                Create(defaultData);
-                manager.Navigator_Property.GoToGroupsPage();
-            }
+        
             SelectGroup(index);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
-
-        //delete
-        //public GroupHelper Remove(int index)
-        //{
-        //    manager.Navigator_Property.GoToGroupsPage();
-        //
-        //    SelectGroup(index);
-        //    RemoveGroup();
-        //    ReturnToGroupsPage();
-        //    return this;
-        //}
 
         public GroupHelper InitNewGroupCreation()
         {
@@ -100,6 +67,7 @@ namespace WebAddressbookTests
 
         public bool IsAnyGroupPresent()
         {
+            manager.Navigator_Property.GoToGroupsPage();
             return IsElementPresent(By.XPath("(//input[@name='selected[]'])"));
         }
 
