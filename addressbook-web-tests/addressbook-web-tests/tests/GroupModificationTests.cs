@@ -29,29 +29,22 @@ namespace WebAddressbookTests
             app.Groups_Property.Modify(1, newData);
         }
 
-        //[Test]
-        //public void PresentGroupModificationTest()
-        //{
-        //    GroupData newData = new GroupData("NewName");
-        //    newData.GroupHeader_Property = null;
-        //    newData.GroupFooter_Property = "NewFooter";
-        //
-        //    GroupData defaultData = new GroupData("DefaultName");
-        //    defaultData.GroupHeader_Property = "DefaultHeader";
-        //    defaultData.GroupFooter_Property = "DefaultFooter";
-        //
-        //    app.Groups_Property.ModifyPresent(1, newData, defaultData);
-        //}
+        
+        [Test]
+        public void GroupModificationTest()
+        {
+            GroupData newData = new GroupData("NewName");
+            newData.GroupHeader_Property = null;
+            newData.GroupFooter_Property = "NewFooter";
 
-        //delete
-        //[Test]
-        //public void GroupModificationTest()
-        //{
-        //    GroupData newData = new GroupData("NewName");
-        //    newData.GroupHeader_Property = null;
-        //    newData.GroupFooter_Property = "NewFooter";
-
-        //    app.Groups_Property.Modify(1, newData);
-        //}
+            List<GroupData> oldGroups = app.Groups_Property.GetGroupList();
+            app.Groups_Property.Modify(1, newData);
+            List<GroupData> newGroups = app.Groups_Property.GetGroupList();
+            Assert.AreEqual(oldGroups.Count, newGroups.Count);
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+        }
     }
 }

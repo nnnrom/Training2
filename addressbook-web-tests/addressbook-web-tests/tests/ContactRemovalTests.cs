@@ -11,7 +11,7 @@ namespace WebAddressbookTests
     class ContactRemovalTests : AuthTestBase
     {
         [Test]
-        public void ContactRemovalTest()
+        public void PresentContactRemovalTest()
         {
             if (app.Contact_Property.IsAnyContactPresent() == false)
             {
@@ -22,6 +22,22 @@ namespace WebAddressbookTests
             }
 
             app.Contact_Property.Remove(1);
+        }
+
+        [Test]
+        public void ContactRemovalTest()
+        {
+            List<ContactData> oldContacts = app.Contact_Property.GetContactList();
+            app.Contact_Property.Remove(1);
+            List<ContactData> newContacts = app.Contact_Property.GetContactList();
+
+            Assert.AreEqual(oldContacts.Count - 1, newContacts.Count);
+
+            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+            
         }
 
         //delete

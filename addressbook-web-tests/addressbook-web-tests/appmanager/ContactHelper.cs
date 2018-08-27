@@ -140,6 +140,26 @@ namespace WebAddressbookTests
         }
 
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator_Property.GoToContactPage();
+            ICollection<IWebElement> elementsLast = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
+            
+            int i = 0;
+            
+            foreach (IWebElement element in elementsLast)
+            {
+                i = i + 1;
+                string last = driver.FindElement(By.XPath("(//tr[@name='entry'][" + i + "]//td[2])")).Text;
+                
+                string first = driver.FindElement(By.XPath("(//tr[@name='entry'][" + i + "]//td[3])")).Text;
+                //System.Console.Out.Write(first);
+                
+                contacts.Add(new ContactData(last, first));
+            }
+            return contacts;
+        }
 
 
     }
