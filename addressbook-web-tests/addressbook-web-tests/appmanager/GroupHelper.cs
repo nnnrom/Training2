@@ -15,7 +15,7 @@ namespace WebAddressbookTests
         
         public GroupHelper Create(GroupData group)
         {
-            manager.Navigator_Property.GoToGroupsPage();
+            manager.Navigator.GoToGroupsPage();
 
             InitNewGroupCreation();
             FillGroupForm(group);
@@ -26,7 +26,7 @@ namespace WebAddressbookTests
                         
         public GroupHelper Modify (int index, GroupData newData)
         {
-            manager.Navigator_Property.GoToGroupsPage();
+            manager.Navigator.GoToGroupsPage();
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newData);
@@ -37,7 +37,7 @@ namespace WebAddressbookTests
                 
         public GroupHelper Remove(int index)
         {
-            manager.Navigator_Property.GoToGroupsPage();
+            manager.Navigator.GoToGroupsPage();
         
             SelectGroup(index);
             RemoveGroup();
@@ -53,9 +53,9 @@ namespace WebAddressbookTests
 
         public GroupHelper FillGroupForm(GroupData group)
         {
-            Type(By.Name("group_name"),group.GroupName_Property);
-            Type(By.Name("group_header"), group.GroupHeader_Property);
-            Type(By.Name("group_footer"), group.GroupFooter_Property);
+            Type(By.Name("group_name"),group.Name);
+            Type(By.Name("group_header"), group.Header);
+            Type(By.Name("group_footer"), group.Footer);
             return this;
         }
 
@@ -68,13 +68,13 @@ namespace WebAddressbookTests
 
         public bool IsAnyGroupPresent()
         {
-            manager.Navigator_Property.GoToGroupsPage();
+            manager.Navigator.GoToGroupsPage();
             return IsElementPresent(By.XPath("(//input[@name='selected[]'])"));
         }
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index+1  + "]")).Click();
             return this;
         }
 
@@ -111,17 +111,37 @@ namespace WebAddressbookTests
             if (groupCache == null)
             {
                 groupCache = new List<GroupData>();
-                manager.Navigator_Property.GoToGroupsPage();
+                manager.Navigator.GoToGroupsPage();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
                 foreach (IWebElement element in elements)
                 {
-                    groupCache.Add(new GroupData(element.Text));
+                    groupCache.Add(new GroupData(null)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
+                string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                string[] parts = allGroupNames.Split('\n');
+                int shift = groupCache.Count - parts.Length;
+                for (int i = 0; i < groupCache.Count; i++)
+                {
+                    if(i < shift)
+                    {
+                        groupCache[i].Name = "";
+                    }
+                    else
+                    {
+                        groupCache[i].Name = parts[i - shift].Trim();
+                    }
                 }
             }
-
             return new List<GroupData>(groupCache);
         }
 
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
 
     }
 }

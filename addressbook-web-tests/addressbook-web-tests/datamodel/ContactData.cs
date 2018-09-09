@@ -8,15 +8,14 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        private string allPhones;
+        private string allEmails;
+        private string homePageLink;
 
-        private string FirstName;
-        private string MiddleName="";
-        private string LastName;
-
-        public ContactData (string LastName, string FirstName)
+        public ContactData (string lastname, string firstname)
         {
-            this.LastName = LastName;
-            this.FirstName = FirstName;
+            SecondName = SecondName;
+            FirstName = FirstName;
         }
 
         public bool Equals(ContactData other)
@@ -29,12 +28,12 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return LastName == other.LastName && FirstName == other.FirstName;
+            return SecondName == other.SecondName && FirstName == other.FirstName;
         }
           
         public override string ToString()
         {
-            return LastName + " " + FirstName;
+            return SecondName + " " + FirstName;
         }
         public int CompareTo(ContactData other)
         {
@@ -43,34 +42,95 @@ namespace WebAddressbookTests
                 return 1;
             }
 
-            if (LastName==other.LastName)
+            if (SecondName==other.SecondName)
             {
                 if (FirstName == other.FirstName)
                 {
                     return 0;
                 }
-                return LastName.CompareTo(other.LastName);
+                return SecondName.CompareTo(other.SecondName);
             }
-            return LastName.CompareTo(other.LastName);
+            return SecondName.CompareTo(other.SecondName);
 
         }
 
-        public string LastName_Property
+        public string SecondName { get; set; }
+        public string MiddleName { get; set; }
+        public string FirstName { get; set; }
+        public string Address { get; set; }
+        public string HomePhone { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkPhone { get; set; }
+        public string Fax { get; set; }
+        public string AllPhones
         {
-            get { return LastName; }
-            set { LastName = value; }
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return CleanUp(HomePhone) + "\r\n" + CleanUp(MobilePhone) + "\r\n" + CleanUp(WorkPhone) + "\r\n" + CleanUp(Fax);
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
         }
 
-        public string MiddleName_Property
+        private string CleanUp(string data)
         {
-            get { return MiddleName; }
-            set { MiddleName = value; }
+            if (data == null|| data == "")
+            {
+                return "";
+            }
+            return data.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
         }
 
-        public string FirstName_Property
+        public string Email1 { get; set; }
+        public string Email2 { get; set; }
+        public string Email3 { get; set; }
+        public string AllEmails
         {
-            get { return FirstName; }
-            set { FirstName = value; }
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return Email1 + "\r\n" + Email2 + "\r\n" + Email3;
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
+        }
+        public string HomePageValue { get; set; }
+
+        public string HomePageLink
+        {
+            get
+            {
+                if (homePageLink != null)
+                {
+                    return homePageLink;
+                }
+                else
+                {
+                    //return HomePageValue;
+                    return "http://"+ HomePageValue +"/";
+                }
+            }
+            set
+            {
+                homePageLink = value;
+            }
         }
     }
 }

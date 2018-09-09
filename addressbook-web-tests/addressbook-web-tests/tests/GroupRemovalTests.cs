@@ -13,18 +13,18 @@ namespace WebAddressbookTests
         [Test]
         public void PresentGroupRemovalTest()
         {
-            if (app.Groups_Property.IsAnyGroupPresent() == false)
+            if (app.Groups.IsAnyGroupPresent() == false)
             {
                 GroupData defaultData = new GroupData("DefaultName");
-                defaultData.GroupHeader_Property = "DefaultHeader";
-                defaultData.GroupFooter_Property = "DefaultFooter";
+                defaultData.Header = "DefaultHeader";
+                defaultData.Footer = "DefaultFooter";
 
-                app.Groups_Property.Create(defaultData);
+                app.Groups.Create(defaultData);
             }
 
-            List<GroupData> oldGroups = app.Groups_Property.GetGroupList();
-            app.Groups_Property.Remove(1);
-            List<GroupData> newGroups = app.Groups_Property.GetGroupList();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Remove(0);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count - 1, newGroups.Count);
             oldGroups.RemoveAt(0);
             oldGroups.Sort();
@@ -36,14 +36,22 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            List<GroupData> oldGroups = app.Groups_Property.GetGroupList();
-            app.Groups_Property.Remove(1);
-            List<GroupData> newGroups = app.Groups_Property.GetGroupList();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Remove(0);
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
+            List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count - 1, newGroups.Count);
-            oldGroups.RemoveAt(0);
             oldGroups.Sort();
             newGroups.Sort();
+
+            GroupData toBeRemoved = oldGroups[0];
+            oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
 
         

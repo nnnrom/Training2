@@ -8,13 +8,9 @@ namespace WebAddressbookTests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        public string Name;
-        private string Header="";
-        private string Footer = "";
-
-        public GroupData(string groupName_Parametr)
+       public GroupData(string name)
         {
-            Name = groupName_Parametr;
+            Name = name;
         }
 
         public bool Equals(GroupData other)
@@ -47,21 +43,9 @@ namespace WebAddressbookTests
             return Name.CompareTo(other.Name);
         }
 
-        public string GroupName_Property
-        {
-            get { return Name; }
-            set { Name = value; }
-        }
-        public string GroupHeader_Property
-        {
-            get { return Header; }
-            set { Header = value; }
-        }
-        public string GroupFooter_Property
-        {
-            get { return Footer; }
-            set { Footer = value; }
-        }
-
+        public string Name { get; set; }
+        public string Header { get; set; }
+        public string Footer { get; set; }
+        public string Id { get; set; }
     }
 }

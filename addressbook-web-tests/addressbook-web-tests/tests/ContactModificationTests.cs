@@ -13,18 +13,18 @@ namespace WebAddressbookTests
         [Test]
         public void PresentContactModificationTest()
         {
-            if (app.Contact_Property.IsAnyContactPresent() == false)
+            if (app.Contacts.IsAnyContactPresent() == false)
             {
                 ContactData defaultData = new ContactData("default_LastName", "default_LastName");
-                defaultData.MiddleName_Property = null;
+                defaultData.MiddleName = null;
 
-                app.Contact_Property.Create(defaultData);
+                app.Contacts.Create(defaultData);
             }
 
             ContactData newData = new ContactData("new_LastName", "new_FirstName");
-            newData.MiddleName_Property = "new_MiddleName";
+            newData.MiddleName = "new_MiddleName";
                         
-            app.Contact_Property.Modify(1, newData);
+            app.Contacts.Modify(0, newData);
 
 
         }
@@ -33,16 +33,16 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             ContactData newData = new ContactData("new_LastName", "new_FirstName");
-            newData.MiddleName_Property = "new_MiddleName";
+            newData.MiddleName = "new_MiddleName";
 
-            List<ContactData> oldContacts = app.Contact_Property.GetContactList();
-            app.Contact_Property.Modify(1, newData);
-            List<ContactData> newContacts = app.Contact_Property.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Modify(0, newData);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
 
             Assert.AreEqual(oldContacts.Count, newContacts.Count);
 
-            oldContacts[0].FirstName_Property = newData.FirstName_Property;
-            oldContacts[0].LastName_Property = newData.LastName_Property;
+            oldContacts[0].FirstName = newData.FirstName;
+            oldContacts[0].SecondName = newData.SecondName;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);

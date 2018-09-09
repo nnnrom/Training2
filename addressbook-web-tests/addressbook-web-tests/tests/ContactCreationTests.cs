@@ -17,9 +17,9 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("newLastName", "newFirstName");
             //contact.ContactMiddleName_Property = "MiddleName_Value";
 
-            List<ContactData> oldContacts = app.Contact_Property.GetContactList();
-            app.Contact_Property.Create(contact);
-            List<ContactData> newContacts = app.Contact_Property.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Create(contact);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
             
             Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
             

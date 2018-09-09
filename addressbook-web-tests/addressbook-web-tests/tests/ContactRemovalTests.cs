@@ -13,23 +13,23 @@ namespace WebAddressbookTests
         [Test]
         public void PresentContactRemovalTest()
         {
-            if (app.Contact_Property.IsAnyContactPresent() == false)
+            if (app.Contacts.IsAnyContactPresent() == false)
             {
                 ContactData defaultData = new ContactData("default_LastName", "default_LastName");
-                defaultData.MiddleName_Property = null;
+                defaultData.MiddleName = null;
 
-                app.Contact_Property.Create(defaultData);
+                app.Contacts.Create(defaultData);
             }
 
-            app.Contact_Property.Remove(1);
+            app.Contacts.Remove(0);
         }
 
         [Test]
         public void ContactRemovalTest()
         {
-            List<ContactData> oldContacts = app.Contact_Property.GetContactList();
-            app.Contact_Property.Remove(1);
-            List<ContactData> newContacts = app.Contact_Property.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            app.Contacts.Remove(0);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
 
             Assert.AreEqual(oldContacts.Count - 1, newContacts.Count);
 
