@@ -15,8 +15,11 @@ namespace WebAddressbookTests
         public void GroupCreationTest()
         {
             GroupData group = new GroupData("Name_Value");
-            group.GroupHeader_Property = "Header_Value";
-            group.GroupFooter_Property = "Footer_Value";
+            group.Header = "Header_Value";
+            // ekranirivanie slash i kavichka, tabulyaciya i perevod stroki: group.Header = "\\\"\t\n";
+            // verbatim stroki s @ bez ekranirovaniya: group.Header = @"d\d""
+            //d";
+            group.Footer = "Footer_Value";
 
             List<GroupData> oldGroups = app.Groups_Property.GetGroupList();
             app.Groups_Property.Create(group);
@@ -34,8 +37,8 @@ namespace WebAddressbookTests
         public void BadNameGroupCreationTest()
         {
             GroupData group = new GroupData("a'a");
-            group.GroupHeader_Property = "";
-            group.GroupFooter_Property = "";
+            group.Header = "";
+            group.Footer = "";
 
             List<GroupData> oldGroups = app.Groups_Property.GetGroupList();
             app.Groups_Property.Create(group);
@@ -53,8 +56,8 @@ namespace WebAddressbookTests
         public void EmptyGroupCreationTest()
         {
             GroupData group = new GroupData("");
-            group.GroupHeader_Property = "";
-            group.GroupFooter_Property = "";
+            group.Header = "";
+            group.Footer = "";
 
             List<GroupData> oldGroups = app.Groups_Property.GetGroupList();
             app.Groups_Property.Create(group);

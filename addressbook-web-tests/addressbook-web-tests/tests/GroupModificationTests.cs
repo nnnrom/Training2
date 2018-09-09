@@ -16,15 +16,15 @@ namespace WebAddressbookTests
             if (app.Groups_Property.IsAnyGroupPresent() == false)
             {
                 GroupData defaultData = new GroupData("DefaultName");
-                defaultData.GroupHeader_Property = "DefaultHeader";
-                defaultData.GroupFooter_Property = "DefaultFooter";
+                defaultData.Header = "DefaultHeader";
+                defaultData.Footer = "DefaultFooter";
                                 
                 app.Groups_Property.Create(defaultData);
             }
 
             GroupData newData = new GroupData("NewName");
-            newData.GroupHeader_Property = null;
-            newData.GroupFooter_Property = "NewFooter";
+            newData.Header = null;
+            newData.Footer = "NewFooter";
 
             app.Groups_Property.Modify(1, newData);
         }
@@ -34,10 +34,12 @@ namespace WebAddressbookTests
         public void GroupModificationTest()
         {
             GroupData newData = new GroupData("NewName");
-            newData.GroupHeader_Property = null;
-            newData.GroupFooter_Property = "NewFooter";
+            newData.Header = null;
+            newData.Footer = "NewFooter";
 
             List<GroupData> oldGroups = app.Groups_Property.GetGroupList();
+            GroupData oldData = oldGroups[0];
+
             app.Groups_Property.Modify(1, newData);
             List<GroupData> newGroups = app.Groups_Property.GetGroupList();
             Assert.AreEqual(oldGroups.Count, newGroups.Count);
@@ -45,6 +47,13 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+            foreach(GroupData group in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+            }
         }
     }
 }

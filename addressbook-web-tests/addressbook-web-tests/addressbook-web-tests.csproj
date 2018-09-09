@@ -69,6 +69,7 @@
     <Compile Include="datamodel\GroupData.cs" />
     <Compile Include="Figure\FigureTests.cs" />
     <Compile Include="appmanager\GroupHelper.cs" />
+    <Compile Include="tests\ContactInformationTests.cs" />
     <Compile Include="tests\ContactModificationTests.cs" />
     <Compile Include="tests\ContactRemovalTests.cs" />
     <Compile Include="tests\GroupModificationTests.cs" />

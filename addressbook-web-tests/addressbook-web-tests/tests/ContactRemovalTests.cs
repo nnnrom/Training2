@@ -16,7 +16,7 @@ namespace WebAddressbookTests
             if (app.Contact_Property.IsAnyContactPresent() == false)
             {
                 ContactData defaultData = new ContactData("default_LastName", "default_LastName");
-                defaultData.MiddleName_Property = null;
+                defaultData.MiddleName = null;
 
                 app.Contact_Property.Create(defaultData);
             }

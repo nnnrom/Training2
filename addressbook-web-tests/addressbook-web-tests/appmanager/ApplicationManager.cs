@@ -67,7 +67,7 @@ namespace WebAddressbookTests
         public LoginHelper Auth_Property
         { get { return loginHelper; } }
 
-        public NavigationHelper Navigator_Property
+        public NavigationHelper Navigator
         { get { return navigator; } }
 
         public GroupHelper Groups_Property 

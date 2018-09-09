@@ -16,8 +16,8 @@ namespace WebAddressbookTests
             if (app.Groups_Property.IsAnyGroupPresent() == false)
             {
                 GroupData defaultData = new GroupData("DefaultName");
-                defaultData.GroupHeader_Property = "DefaultHeader";
-                defaultData.GroupFooter_Property = "DefaultFooter";
+                defaultData.Header = "DefaultHeader";
+                defaultData.Footer = "DefaultFooter";
 
                 app.Groups_Property.Create(defaultData);
             }
@@ -44,6 +44,10 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, oldGroups[1]);
+            }
         }
 
         

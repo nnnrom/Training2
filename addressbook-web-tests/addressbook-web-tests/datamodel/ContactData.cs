@@ -8,15 +8,14 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        private string allPhones;
+        private string allEmails;
+        private string homepage;
 
-        private string FirstName;
-        private string MiddleName="";
-        private string LastName;
-
-        public ContactData (string LastName, string FirstName)
+        public ContactData (string firstName, string lastName)
         {
-            this.LastName = LastName;
-            this.FirstName = FirstName;
+            LastName = lastName;
+            FirstName = firstName;
         }
 
         public bool Equals(ContactData other)
@@ -55,22 +54,81 @@ namespace WebAddressbookTests
 
         }
 
-        public string LastName_Property
+        public string LastName { get; set; }
+        public string MiddleName { get; set; }
+        public string FirstName { get; set; }
+        public string Address { get; set; }
+        public string HomePhone { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkPhone { get; set; }
+
+        //public string AllPhones { get; set; }
+        public string AllPhones
         {
-            get { return LastName; }
-            set { LastName = value; }
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+                return "";
+            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
         }
 
-        public string MiddleName_Property
+        public string Email1 { get; set; }
+        public string Email2 { get; set; }
+        public string Email3 { get; set; }
+        //public string AllEmail { get; set; }
+        public string AllEmails
         {
-            get { return MiddleName; }
-            set { MiddleName = value; }
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanUp(Email1) + CleanUp(Email2) + CleanUp(Email3)).Trim();
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
         }
-
-        public string FirstName_Property
+        //public string HomePage { get; set; }
+        public string HomepageValue { get; set; }
+        public string HomePageLink
         {
-            get { return FirstName; }
-            set { FirstName = value; }
+            get
+            {
+                if (homepage != null)
+                {
+                    return homepage;
+                }
+                else
+                {
+                    return "http://" + HomepageValue;
+                }
+            }
+            set
+            {
+                homepage = value;
+            }
         }
     }
 }
