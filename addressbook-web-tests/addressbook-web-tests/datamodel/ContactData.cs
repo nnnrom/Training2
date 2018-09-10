@@ -11,6 +11,7 @@ namespace WebAddressbookTests
         private string allPhones;
         private string allEmails;
         private string homePageLink;
+        private string allData;
 
         public ContactData (string lastname, string firstname)
         {
@@ -61,7 +62,7 @@ namespace WebAddressbookTests
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
-        public string Fax { get; set; }
+        public string SecondaryHome { get; set; }
         public string AllPhones
         {
             get
@@ -72,7 +73,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return CleanUp(HomePhone) + "\r\n" + CleanUp(MobilePhone) + "\r\n" + CleanUp(WorkPhone) + "\r\n" + CleanUp(Fax);
+                    return CleanUp(HomePhone) + "\r\n" + CleanUp(MobilePhone) + "\r\n" + CleanUp(WorkPhone) + "\r\n" + CleanUp(SecondaryHome);
                 }
             }
             set
@@ -130,6 +131,34 @@ namespace WebAddressbookTests
             set
             {
                 homePageLink = value;
+            }
+        }
+        public string AllData
+        {
+            get
+            {
+                if (allData != null)
+                {
+                    return allData;
+                }
+                else
+                {
+                    return FirstName + " " + MiddleName + " " + SecondName;
+                        //+ "\r\n"
+                              //+ Address + "\r\n"
+                              //+ "\r\n"
+                              //+ "H: " + HomePhone + "\r\n"
+                              //+ "M: " + MobilePhone + "\r\n"
+                              //+ "W: " + WorkPhone + "\r\n"
+                              //+ "\r\n"
+                              //+ Email1 + "\r\n"
+                              //+ Email2 + "\r\n"
+                              //+ Email3;
+                }
+            }
+            set
+            {
+                allData = value;
             }
         }
     }
